@@ -25,7 +25,7 @@ public class AnalisadorLexico {
   }
 	
   public Token pegarProximoToken() throws IOException, LexerException {
-			
+
 	boolean feito = false;
 	int tipoAtual = Token.EOF;
 	Object valorAtual = null;
@@ -36,7 +36,7 @@ public class AnalisadorLexico {
 	while ( !feito ) {
 		
 	  int caractere = pegardoBuffer();
-	  
+
 	  if ( Character.isWhitespace(caractere) && tipoAtual == Token.EOF ) {
 		
 	    continue;
@@ -107,9 +107,8 @@ public class AnalisadorLexico {
 			  
 		      tipoAtual = Token.OP;
 			  valorAtual = new Integer( Token.MUL );
-			 
-			  feito = true;
-			  
+              estado = 51;
+
 		    }break;
 
 		    case '/': {
@@ -184,7 +183,7 @@ public class AnalisadorLexico {
 			  feito = true;
 			
 		    }break;
-			  
+
 		    default:{
 		    
 		      retoneparaBuffer( caractere );
@@ -203,6 +202,9 @@ public class AnalisadorLexico {
 		    valorAtual = new Integer( Token.LE );
 			feito = true;
 			
+		  } else if( caractere == '>' ){
+			  valorAtual = new Integer( Token.NE );
+			  feito = true;
 		  } else {
 						
 		    retoneparaBuffer( caractere );
@@ -431,17 +433,18 @@ public class AnalisadorLexico {
 		}break;
 		
 		case 39: {
-		  
-		  if ( Character.isDigit( caractere ) ) {
+
+		  if ( Character.isDigit( caractere )) {
 				
 		    estado = 39;
 			sBuffer.append( ( char) caractere );
 			
 		  }
-		  /*else if(Character.isLetter(caractere)) {
-			  throw new LexerException();
-			  
-		  }*/
+		  else if(caractere == '.') {
+              sBuffer.append( (char) caractere);
+              //retoneparaBuffer(caractere);
+              estado = 40;
+		  }
 		  else {
 
 		    retoneparaBuffer( caractere );  
@@ -450,9 +453,48 @@ public class AnalisadorLexico {
 			feito = true; 
 			
 		  }
-	
+
 		}break;
-		
+
+          case 40: {
+              //caractere = pegardoBuffer();
+              if(Character.isDigit(caractere)){
+                  //sBuffer.append((char) caractere);
+                  retoneparaBuffer(caractere);
+                  estado = 50;
+              } else {
+                  throw new Error("O diabo nao foi econtrado....");
+              }
+          }break;
+
+          case 50: {
+              if (Character.isDigit(caractere)) {
+                  sBuffer.append((char) caractere);
+                  estado = 50;
+              }
+              else if (caractere == 'f'){
+                  sBuffer.append((char) caractere);
+                  valorAtual = sBuffer;
+                  feito = true;
+              } else {
+                  sBuffer.append('f');
+                  retoneparaBuffer(caractere);
+                  valorAtual = sBuffer;
+                  feito = true;
+              }
+          }break;
+
+          case 51: {
+              //caractere = pegardoBuffer();
+              if(caractere == '*'){
+                  valorAtual = Token.EXP;
+                  feito = true;
+              } else {
+                  retoneparaBuffer(caractere);
+                  feito = true;
+              }
+          }break;
+
 		case 41: {
 			
 		  if( caractere == '\'' ) {

@@ -27,6 +27,7 @@ public class Token {
   public static final int LITERALSTRING  = 18;
   public static final int LITERALCHAR = 19;
   public static final int PONTUACAO = 20;
+  public static final int LITERALBOOLEANO = 21;
 
   
   // Valor fim de Arquivo
@@ -52,6 +53,7 @@ public class Token {
   public static final int SUB = 2;
   public static final int DIV = 3;
   public static final int MUL = 4;
+  public static final int EXP = 5;
   
   // Valores para tokens LOG
 
@@ -269,6 +271,8 @@ public class Token {
       case DIV: resultado = "/";
 			    break;
 
+      case EXP: resultado = "**";
+                break;
     }
 
     return resultado;
