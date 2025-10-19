@@ -54,7 +54,10 @@ public class Token {
   public static final int DIV = 3;
   public static final int MUL = 4;
   public static final int EXP = 5;
-  
+  public static final int LSH = 6;
+  public static final int RSH = 7;
+
+
   // Valores para tokens LOG
 
   public static final int AND = 1;
@@ -201,7 +204,10 @@ public class Token {
 	
 	    case LITERALCHAR: resultado = "literalChar";
 				          break;
-	
+
+        case LITERALBOOLEANO: resultado = "literalBooleano";
+                break;
+
 	    case AT: resultado = "at";
 	    		 break;			
 
@@ -272,6 +278,12 @@ public class Token {
 			    break;
 
       case EXP: resultado = "**";
+                break;
+
+      case LSH: resultado = "<<";
+                break;
+
+      case RSH: resultado = ">>";
                 break;
     }
 

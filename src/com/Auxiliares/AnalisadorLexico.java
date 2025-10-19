@@ -205,7 +205,12 @@ public class AnalisadorLexico {
 		  } else if( caractere == '>' ){
 			  valorAtual = new Integer( Token.NE );
 			  feito = true;
-		  } else {
+              // NAO ENTEDEMOS ESSE AQUI... <> É QUE TOKEN???? OXEEE
+		  } else if( caractere == '<' ){
+             tipoAtual = Token.OP;
+             valorAtual = new Integer(Token.LSH);
+             feito = true;
+          } else {
 						
 		    retoneparaBuffer( caractere );
 			feito = true;
@@ -255,7 +260,10 @@ public class AnalisadorLexico {
 							
 			valorAtual = new Integer( Token.GE );
 			feito = true;
-			
+          } else if( caractere == '>' ){
+              tipoAtual = Token.OP;
+              valorAtual = new Integer(Token.RSH);
+              feito = true;
 		  } else {
 								
 			retoneparaBuffer( caractere );
