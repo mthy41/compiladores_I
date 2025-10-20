@@ -56,7 +56,11 @@ public class Token {
   public static final int EXP = 5;
   public static final int LSH = 6;
   public static final int RSH = 7;
+  public static final int INC = 8;
+  public static final int DEC = 9;
 
+  // Valores para tokens AT
+  public static final int EAD = 10;
 
   // Valores para tokens LOG
 
@@ -123,7 +127,7 @@ public class Token {
       case RELOP: valorString = tipoRelop( (Integer) valor);
           		   break;
     
-      case AT: valorString = "ATR";
+      case AT: valorString = tipoAT((Integer) valor );
                break;
      
       case OP: valorString = tipoOP( (Integer) valor );
@@ -285,10 +289,28 @@ public class Token {
 
       case RSH: resultado = ">>";
                 break;
+
+      case INC: resultado = "++";
+                break;
+
+      case DEC: resultado = "--";
+                break;
     }
 
     return resultado;
 
+  }
+
+  private String tipoAT(Integer tipo){
+      String resultado = "Erro";
+     switch (tipo.intValue()){
+         case ATR: resultado = "=";
+         break;
+
+         case EAD: resultado = "+=";
+         break;
+     }
+     return resultado;
   }
 
   private String tipoLog(Integer tipo1) {

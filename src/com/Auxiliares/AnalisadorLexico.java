@@ -86,21 +86,17 @@ public class AnalisadorLexico {
 		    }break;
 		    
 		    case '+': {
-		    	
+              estado = 52;
 		      tipoAtual = Token.OP;
 		      valorAtual = new Integer( Token.AD );
-		      
-		      feito = true;
-		      
+
 		    }break;
 
 		    case '-': {
-			      
+              estado = 53;
 		      tipoAtual = Token.OP;
 			  valorAtual = new Integer( Token.SUB );
-			  
-		      feito = true;
-			  
+
 		    }break;
 
 		    case '*': {
@@ -324,7 +320,6 @@ public class AnalisadorLexico {
 			  
 		    tipoAtual = Token.LOG;
 		    valorAtual = new Integer( Token.AND );
-		    
 		    feito = true;
 		    
 		  } else {
@@ -517,8 +512,32 @@ public class AnalisadorLexico {
               }
           }break;
 
+        case 52: {
+            if(caractere == '+'){
+                valorAtual = Token.INC;
+                feito = true;
+            } else if (caractere == '='){
+                tipoAtual = Token.AT;
+                valorAtual = Token.EAD;
+                feito = true;
+            } else {
+                retoneparaBuffer(caractere);
+                feito = true;
+            }
+        }break;
+
+        case 53: {
+            if(caractere == '-'){
+                valorAtual = Token.DEC;
+                feito = true;
+            } else {
+                retoneparaBuffer(caractere);
+                feito = true;
+            }
+        }break;
+
 		case 41: {
-			
+
 		  if( caractere == '\'' ) {
 			 
 		    estado = 42;
