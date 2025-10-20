@@ -392,7 +392,21 @@ public class AnalisadorLexico {
 		}break;
 				
 		case 36: {
-			
+          if(sBuffer.toString().equals("true")){
+              tipoAtual = Token.LITERALBOOLEANO;
+              valorAtual = new Integer(Token.TRUE);
+              feito = true;
+              retoneparaBuffer(caractere);
+              continue;
+          }
+
+          if(sBuffer.toString().equals("false")){
+              tipoAtual = Token.LITERALBOOLEANO;
+              valorAtual = new Integer(Token.FALSE);
+              retoneparaBuffer(caractere);
+              feito = true;
+              continue;
+          }
 		  if ( Character.isLetterOrDigit( caractere ) || caractere == '_' ) {
 
 			estado = 36;

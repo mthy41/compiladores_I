@@ -7,7 +7,6 @@ public class Token {
 	
   public static final int CHAR = 0;
   public static final int ELSE = 1;
-  public static final int FALSE = 2;
   public static final int IF = 3;
   public static final int INT = 4;
   public static final int MAIN = 5;
@@ -28,8 +27,9 @@ public class Token {
   public static final int LITERALCHAR = 19;
   public static final int PONTUACAO = 20;
   public static final int LITERALBOOLEANO = 21;
+  public static final int TRUE = 22;
+  public static final int FALSE = 23;
 
-  
   // Valor fim de Arquivo
   
   public static final int EOF   = 100;
@@ -133,7 +133,10 @@ public class Token {
 	            break;  
 	
       case PONTUACAO: valorString = tipoPontuacao( (Integer) valor );  
-                      break;  
+                      break;
+
+        case LITERALBOOLEANO: valorString = tipoBoolean( (Integer) valor);
+        break;
      
       default: {
 	
@@ -163,9 +166,6 @@ public class Token {
 	    case ELSE: resultado = "else";
 			       break;
 		
-	    case FALSE: resultado = "falso";
-				    break;
-	 
 	    case IF: resultado = "if";
 	             break;
 
@@ -340,6 +340,18 @@ public class Token {
 
     return resultado;
 
+  }
+
+  private String tipoBoolean(Integer tipo){
+      String resultado = "Erro";
+      switch (tipo){
+          case FALSE: resultado = "false";
+                    break;
+
+          case TRUE: resultado = "true";
+                    break;
+      }
+      return resultado;
   }
 
 }

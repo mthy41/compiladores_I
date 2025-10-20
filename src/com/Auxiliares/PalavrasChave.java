@@ -6,6 +6,7 @@ public class PalavrasChave {
   private static final String CHAR   = "char";
   private static final String ELSE = "else";
   private static final String FALSE = "false";
+  private static final String TRUE = "true";
   private static final String INT   = "int";
   private static final String IF   = "if";
   private static final String MAIN = "main";
@@ -20,9 +21,9 @@ public class PalavrasChave {
 
     String palavra1 = palavra.toString();
 	
-    if ( palavra1.equals(CHAR) || palavra1.equals(ELSE) || palavra1.equals(FALSE) || palavra1.equals(INT) || palavra1.equals(IF)
+    if ( palavra1.equals(CHAR) || palavra1.equals(ELSE) || palavra1.equals(INT) || palavra1.equals(IF)
       || palavra1.equals(MAIN) || palavra1.equals(OUT) || palavra1.equals(PRINTF) || palavra1.equals(RETURN)
-      || palavra1.equals(STATIC) || palavra1.equals(VOID) || palavra1.equals(WHILE) ) {
+      || palavra1.equals(STATIC) || palavra1.equals(VOID) || palavra1.equals(WHILE)) {
 	
       return true;
   
@@ -45,10 +46,6 @@ public class PalavrasChave {
     } else if (palavra1.equals(ELSE)) {
 
       resultado = Token.ELSE;
-
-    } else if (palavra1.equals(FALSE)) {
-  
-      resultado = Token.FALSE;
 
     } else if (palavra1.equals(INT)) {
   
@@ -79,9 +76,14 @@ public class PalavrasChave {
       resultado = Token.STATIC;
     	
     } else if (palavra1.equals(VOID)) {
-        
-      resultado = Token.VOID;
-    	
+
+        resultado = Token.VOID;
+
+    } else if (palavra1.equals(TRUE)){
+        resultado = Token.TRUE;
+
+    } else if (palavra1.equals(FALSE)){
+        resultado = Token.FALSE;
     } else {
         
       resultado = Token.WHILE;
